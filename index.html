@@ -14,9 +14,10 @@
       --accent-soft: #fbf1d6;
       --rule: #e6dfcf;
       --card: #ffffff;
+      --nav-w: 232px;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 24px; }
     body {
       margin: 0;
       font-family: "Calibri", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -29,10 +30,26 @@
     a:hover { text-decoration: underline; }
     .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
+    /* Hero */
     header.hero {
       background: linear-gradient(135deg, #1d1d1f 0%, #3a2e0a 100%);
       color: #fff;
       padding: 88px 0 72px;
+    }
+    .hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 48px;
+      align-items: center;
+    }
+    .cover {
+      width: 100%;
+      border-radius: 6px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      display: block;
     }
     .eyebrow {
       text-transform: uppercase;
@@ -49,7 +66,6 @@
     }
     header.hero .sub {
       font-size: clamp(18px, 2.4vw, 22px);
-      max-width: 720px;
       color: #e8e2d2;
       margin: 0 0 32px;
     }
@@ -69,11 +85,7 @@
 
     section { padding: 64px 0; border-bottom: 1px solid var(--rule); }
     section:last-of-type { border-bottom: none; }
-    h2 {
-      font-size: 30px;
-      margin: 0 0 12px;
-      line-height: 1.2;
-    }
+    h2 { font-size: 30px; margin: 0 0 12px; line-height: 1.2; }
     h3 { font-size: 20px; margin: 0 0 8px; }
     .lead { color: var(--muted); max-width: 760px; margin: 0 0 32px; }
 
@@ -133,12 +145,7 @@
       margin-bottom: 14px;
       padding: 4px 22px;
     }
-    .toc summary {
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 18px;
-      padding: 14px 0;
-    }
+    .toc summary { cursor: pointer; font-weight: 600; font-size: 18px; padding: 14px 0; }
     .toc ul { margin: 0 0 16px; padding-left: 20px; color: var(--muted); }
     .toc li { margin-bottom: 4px; }
 
@@ -155,32 +162,133 @@
     }
     .download p { margin: 0; max-width: 560px; }
 
-    footer {
-      padding: 36px 0 56px;
-      color: var(--muted);
-      font-size: 14px;
-    }
+    footer { padding: 36px 0 56px; color: var(--muted); font-size: 14px; }
     footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
-    @media (max-width: 600px) {
+    /* Floating contents navigator (left) */
+    .float-nav {
+      position: fixed;
+      top: 96px;
+      left: 16px;
+      width: var(--nav-w);
+      max-height: calc(100vh - 128px);
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(29, 29, 31, 0.10);
+      padding: 16px 14px;
+      z-index: 50;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .float-nav .nav-title {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 11px;
+      color: var(--muted);
+      margin: 0 0 10px 8px;
+    }
+    .float-nav ol { list-style: none; margin: 0; padding: 0; }
+    .float-nav li a {
+      display: block;
+      padding: 7px 10px;
+      border-radius: 6px;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    .float-nav li a:hover { background: var(--accent-soft); }
+    .float-nav li a.active {
+      background: var(--accent-soft);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .float-nav li.sub a { padding-left: 22px; font-size: 13px; color: var(--muted); }
+    .float-nav .nav-close {
+      display: none;
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .nav-toggle {
+      display: none;
+      position: fixed;
+      left: 16px;
+      bottom: 20px;
+      z-index: 60;
+      background: var(--accent);
+      color: #1d1d1f;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Wide screens: nav fits to the left of the content column */
+    @media (min-width: 1320px) {
+      .float-nav { display: block; }
+    }
+
+    /* Narrower screens: nav collapses to a button that opens it as an overlay */
+    @media (max-width: 1319px) {
+      .float-nav { display: none; }
+      .float-nav.open { display: block; }
+      .float-nav.open .nav-close { display: block; }
+      .nav-toggle { display: block; }
+    }
+
+    @media (max-width: 760px) {
       header.hero { padding: 64px 0 56px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .cover { max-width: 260px; margin: 0 auto; }
       section { padding: 48px 0; }
       .download { padding: 24px; }
     }
   </style>
 </head>
-<body>
+<body id="top">
+
+  <nav class="float-nav" id="floatNav" aria-label="Contents">
+    <button class="nav-close" id="navClose" aria-label="Close contents">&times;</button>
+    <p class="nav-title">Contents</p>
+    <ol>
+      <li><a href="#top">Top of page</a></li>
+      <li><a href="#about">About this playbook</a></li>
+      <li><a href="#journey">The journey</a></li>
+      <li><a href="#principles">Ten principles</a></li>
+      <li><a href="#contents">Full contents</a></li>
+      <li class="sub"><a href="#contents">Front matter</a></li>
+      <li class="sub"><a href="#contents">Part I: Opportunity Discovery</a></li>
+      <li class="sub"><a href="#contents">Part II: Adoption Framework</a></li>
+      <li class="sub"><a href="#contents">Part III: Execution Playbook</a></li>
+      <li class="sub"><a href="#contents">Back matter</a></li>
+      <li><a href="#download">Read the PDF</a></li>
+    </ol>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-controls="floatNav" aria-expanded="false">Contents</button>
 
   <header class="hero">
-    <div class="wrap">
-      <p class="eyebrow">A practical framework</p>
-      <h1>AI Transformation Playbook</h1>
-      <p class="sub">A Practical Framework for AI Adoption, Governance, and Execution, from boardroom strategy to shipped code.</p>
-      <p class="meta">By Hemoji Rao G, Independent AI Practitioner and AI Governance &middot; July 2026 &middot; Version 7 of the manuscript</p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="The_AI_Transformation_Playbook_v12.pdf">Read the playbook (PDF)</a>
-        <a class="btn btn-ghost" href="#contents">Browse the contents</a>
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">A practical framework</p>
+        <h1>AI Transformation Playbook</h1>
+        <p class="sub">A Practical Framework for AI Adoption, Governance, and Execution, from boardroom strategy to shipped code.</p>
+        <p class="meta">By Hemoji Rao G, Independent AI Practitioner and AI Governance &middot; July 2026 &middot; Version 7 of the manuscript</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="The_AI_Transformation_Playbook_v12.pdf">Read the playbook (PDF)</a>
+          <a class="btn btn-ghost" href="#contents">Browse the contents</a>
+        </div>
       </div>
+      <img class="cover" src="assets/cover.jpg" alt="Cover of the AI Transformation Playbook: a yellow infographic showing the AI adoption journey from Discover to Scale, by Hemoji Rao G">
     </div>
   </header>
 
@@ -327,6 +435,53 @@
       <span><a href="README.md">About this repository</a></span>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('floatNav');
+      var toggle = document.getElementById('navToggle');
+      var close = document.getElementById('navClose');
+
+      // Narrow screens: open/close the contents overlay
+      function setOpen(open) {
+        nav.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      toggle.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('open'));
+      });
+      close.addEventListener('click', function () { setOpen(false); });
+      // Close the overlay after choosing a link on narrow screens
+      nav.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A' && window.innerWidth < 1320) setOpen(false);
+      });
+
+      // Highlight the section currently in view
+      var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+      var byId = {};
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        (byId[id] = byId[id] || []).push(a);
+      });
+      var sections = ['top', 'about', 'journey', 'principles', 'contents', 'download']
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+
+      function setActive(id) {
+        links.forEach(function (a) { a.classList.remove('active'); });
+        (byId[id] || []).forEach(function (a) { a.classList.add('active'); });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        sections.forEach(function (s) { observer.observe(s); });
+      }
+    })();
+  </script>
 
 </body>
 </html>
