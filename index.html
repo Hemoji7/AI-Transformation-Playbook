@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Transformation Playbook by Hemoji Rao G: a practical framework for AI adoption, governance, and execution, from boardroom strategy to shipped code.">
+  <title>AI Transformation Playbook</title>
+  <style>
+    :root {
+      --bg: #fdfaf3;
+      --ink: #1d1d1f;
+      --muted: #5c5c63;
+      --accent: #c98a00;
+      --accent-soft: #fbf1d6;
+      --rule: #e6dfcf;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Calibri", "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    a { color: var(--accent); }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+    header.hero {
+      background: linear-gradient(135deg, #1d1d1f 0%, #3a2e0a 100%);
+      color: #fff;
+      padding: 88px 0 72px;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 13px;
+      color: #f2c24b;
+      margin: 0 0 14px;
+    }
+    header.hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      line-height: 1.1;
+      margin: 0 0 18px;
+      font-weight: 700;
+    }
+    header.hero .sub {
+      font-size: clamp(18px, 2.4vw, 22px);
+      max-width: 720px;
+      color: #e8e2d2;
+      margin: 0 0 32px;
+    }
+    .meta { color: #cfc7b2; font-size: 15px; margin: 0 0 32px; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #1d1d1f; }
+    .btn-primary:hover { background: #e0a21a; text-decoration: none; }
+    .btn-ghost { border: 1px solid #f2c24b; color: #f2c24b; }
+    .btn-ghost:hover { background: rgba(242, 194, 75, 0.12); text-decoration: none; }
+
+    section { padding: 64px 0; border-bottom: 1px solid var(--rule); }
+    section:last-of-type { border-bottom: none; }
+    h2 {
+      font-size: 30px;
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+    h3 { font-size: 20px; margin: 0 0 8px; }
+    .lead { color: var(--muted); max-width: 760px; margin: 0 0 32px; }
+
+    .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .card .tag {
+      display: inline-block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7a5600;
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .card ul { margin: 8px 0 0; padding-left: 20px; }
+    .card li { margin-bottom: 4px; }
+
+    ol.journey { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+    ol.journey li {
+      counter-increment: step;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px dashed var(--rule);
+    }
+    ol.journey li:last-child { border-bottom: none; }
+    ol.journey li::before {
+      content: counter(step);
+      flex: 0 0 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #1d1d1f;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    ol.journey strong { display: block; }
+    ol.journey span { color: var(--muted); }
+
+    .principles { columns: 2 320px; column-gap: 40px; padding-left: 20px; margin: 0; }
+    .principles li { margin-bottom: 14px; break-inside: avoid; }
+
+    .toc details {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      padding: 4px 22px;
+    }
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 14px 0;
+    }
+    .toc ul { margin: 0 0 16px; padding-left: 20px; color: var(--muted); }
+    .toc li { margin-bottom: 4px; }
+
+    .download {
+      background: var(--accent-soft);
+      border: 1px solid #ecd58f;
+      border-radius: 14px;
+      padding: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .download p { margin: 0; max-width: 560px; }
+
+    footer {
+      padding: 36px 0 56px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+    @media (max-width: 600px) {
+      header.hero { padding: 64px 0 56px; }
+      section { padding: 48px 0; }
+      .download { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">A practical framework</p>
+      <h1>AI Transformation Playbook</h1>
+      <p class="sub">A Practical Framework for AI Adoption, Governance, and Execution, from boardroom strategy to shipped code.</p>
+      <p class="meta">By Hemoji Rao G, Independent AI Practitioner and AI Governance &middot; July 2026 &middot; Version 7 of the manuscript</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="The_AI_Transformation_Playbook_v12.pdf">Read the playbook (PDF)</a>
+        <a class="btn btn-ghost" href="#contents">Browse the contents</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>About this playbook</h2>
+      <p class="lead">
+        The playbook follows one question from first idea to working, governed deployment: should we pursue AI here, and if so, how do we do it well?
+        It is written for organizations under 100 employees and is designed to scale as headcount grows.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <span class="tag">Part I</span>
+          <h3>AI Opportunity Discovery</h3>
+          <p>Decide whether AI is worth pursuing and where it fits: readiness, opportunity identification, prioritization, business cases, and architecture selection.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Part II</span>
+          <h3>AI Adoption Framework</h3>
+          <p>A universal maturity model applied at six levels, from enterprise and management down to team, project, developer, and QA practice.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Part III</span>
+          <h3>AI Execution Playbook</h3>
+          <p>Hands-on practices for developers and QA, plus agentic AI, RAG, MCP, local versus cloud models, ROI measurement, and enterprise case studies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="wrap">
+      <h2>The journey the book follows</h2>
+      <p class="lead">Each part answers one of the questions a responsible AI decision has to pass through.</p>
+      <ol class="journey">
+        <li><div><strong>SHOULD we pursue this?</strong><span>Measure the problem before choosing a technology.</span></div></li>
+        <li><div><strong>WHAT should we do first?</strong><span>Rank opportunities by value, feasibility, and risk.</span></div></li>
+        <li><div><strong>CAN it work?</strong><span>Test architecture and data against the real problem.</span></div></li>
+        <li><div><strong>CAN we operate it responsibly?</strong><span>Put governance, accountability, and review in place.</span></div></li>
+        <li><div><strong>SHOULD we continue?</strong><span>Keep measuring, learning, and adjusting over time.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="principles">
+    <div class="wrap">
+      <h2>Ten AI transformation principles</h2>
+      <p class="lead">The principles that run through every chapter.</p>
+      <ol class="principles">
+        <li>Measure before you invest</li>
+        <li>Chase real pain, not trending use cases</li>
+        <li>Govern lightly, but govern first</li>
+        <li>A human is always accountable</li>
+        <li>Every stage has a diagnostic, not a vibe</li>
+        <li>Architecture follows the problem, not the trend</li>
+        <li>Credit the reviewer's time, not just the generator's</li>
+        <li>Small, reviewed units of change beat large, unreviewed ones</li>
+        <li>Distinguish a vendor's claim from an independent finding</li>
+        <li>Treat the practice as living, not a launch</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contents" class="toc">
+    <div class="wrap">
+      <h2>Contents</h2>
+      <p class="lead">A high-level outline. The PDF has the full table of contents with page numbers.</p>
+
+      <details open>
+        <summary>Front matter: Executive Summary and Introduction</summary>
+        <ul>
+          <li>A guided path from an idea to an informed AI decision</li>
+          <li>How the playbook is organized, and how to read it</li>
+          <li>The journey the playbook follows; what success looks like</li>
+          <li>Ten AI transformation principles</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Part I: AI Opportunity Discovery</summary>
+        <ul>
+          <li>AI Readiness Assessment</li>
+          <li>Opportunity Identification</li>
+          <li>Prioritization Matrix</li>
+          <li>Business Case</li>
+          <li>AI Architecture Selection</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Part II: AI Adoption Framework</summary>
+        <ul>
+          <li>Purpose and scope; the universal AI adoption maturity model</li>
+          <li>Minimal roadmap; AI operating model and role responsibility matrix</li>
+          <li>Chapter 11: Enterprise Level</li>
+          <li>Chapter 12: Management Level</li>
+          <li>Chapter 13: Team Level</li>
+          <li>Chapter 14: Project Level</li>
+          <li>Chapter 15: Developer Level</li>
+          <li>Chapter 16: QA Level</li>
+          <li>Chapter 17: Measuring Success, the "How Do We Know" Scorecard</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Part III: AI Execution Playbook</summary>
+        <ul>
+          <li>Chapter 21: Developer Practices, Beyond Basic Adoption</li>
+          <li>Chapter 22: QA Practices, Beyond Basic Adoption</li>
+          <li>Chapter 23: Agentic AI</li>
+          <li>Chapter 24: RAG, Retrieval-Augmented Generation</li>
+          <li>Chapter 25: MCP, Model Context Protocol</li>
+          <li>Chapter 26: Local vs. Cloud Models</li>
+          <li>Chapter 27: ROI Measurement</li>
+          <li>Chapter 28: Enterprise Case Studies</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Back matter</summary>
+        <ul>
+          <li>Templates &amp; Worksheets</li>
+          <li>Conclusion &amp; Summary</li>
+          <li>Appendix: Frameworks, Matrices, and Scorecards at a Glance</li>
+          <li>Top AI transformation mistakes; capability matrix; future roadmap 2026&ndash;2030</li>
+          <li>Glossary and References</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <div class="download">
+        <p><strong>Read the full playbook.</strong> The PDF includes the complete text, tables, and worked examples. The running example throughout is Mylar Technologies, a composite illustrative company.</p>
+        <a class="btn btn-primary" href="The_AI_Transformation_Playbook_v12.pdf">Download the PDF</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Hemoji Rao G. All rights reserved.</span>
+      <span><a href="README.md">About this repository</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>
